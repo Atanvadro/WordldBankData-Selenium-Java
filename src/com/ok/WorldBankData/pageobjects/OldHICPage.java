@@ -7,10 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.ok.selenium.util.WebUtil;
 
-public class OldCountriesAndEconomiesPage {
+public class OldHICPage {
 
-	public OldHICPage clickHighIncome(WebDriver driver) {
-		WebUtil.click(driver, By.xpath(Locators.highIncomeLinkLocator));
-		return PageFactory.initElements(driver, OldHICPage.class);
-	}
 }

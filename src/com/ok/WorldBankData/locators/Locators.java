@@ -6,4 +6,6 @@ public class Locators {
 	public static String oldSiteLinkLocator = "//a[contains(@href, 'archive.data.worldbank.org')]";
 
 	public static String byCountryTabLocator = "//li[@class='country first']";
+
+	public static String highIncomeLinkLocator = "//a[text() = 'High income']";
 }

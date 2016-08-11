@@ -40,8 +40,8 @@ public class WBD_Test_1 {
 	//	(Note - Above step added due to recent modification to the world bank website)
 	//	It should navigate to World bank site "Data" tab "Countries and Economies" section i.e. country page. 
 	     OldCountriesAndEconomiesPage oldCountriesAndEconomiesPage = oldDataMenuTab.clickByCountryTab(driver);
-	     //	 4  In the Countries and Economies" section, in the "Income Levels" block,  click on "High income" item.  It should navigate to World bank site's income-level/HIC page. 
-	     
+	//	 4  In the Countries and Economies" section, in the "Income Levels" block,  click on "High income" item.  It should navigate to World bank site's income-level/HIC page. 
+	     OldHICPage oldHICPAge = oldCountriesAndEconomiesPage.clickHighIncome(driver);
 	//	 5  Click on Country Andorra.  It should navigate to Andorra country specific page.
 	     
 	//	 6  Note the value for following 3 factors:
