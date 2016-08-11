@@ -7,11 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.ok.selenium.util.WebUtil;
 
-public class HomePage{
-
-	public DataPage clickDataTab(WebDriver driver) {
-		WebUtil.click(driver, By.xpath(Locators.dataTabLocator));
-		return PageFactory.initElements(driver, DataPage.class);
-	}
+public class OldCountriesAndEconomiesPage {
+	
 
 }
