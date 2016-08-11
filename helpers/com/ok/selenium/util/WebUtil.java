@@ -13,9 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WebUtil {
     final static int WAIT_TIME_OUT = 30;
 
-    public static WebPage goToPage(WebDriver driver) {
-        driver.get("http://gmail.com");
-        return PageFactory.initElements(driver, WebPage.class);
+    public static <T> T goToPage(WebDriver driver, java.lang.Class<T> PageObject,  String pageURL) {
+        driver.get(pageURL);
+        return PageFactory.initElements(driver, PageObject);
     }
 
     public static void click(WebDriver driver, By by) {
@@ -28,7 +28,7 @@ public class WebUtil {
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
-    public static boolean isElementExist(WebDriver driver, By by) {
+    public static boolean doesElementExist(WebDriver driver, By by) {
         return (driver.findElements(by).size() > 0);
     }
 

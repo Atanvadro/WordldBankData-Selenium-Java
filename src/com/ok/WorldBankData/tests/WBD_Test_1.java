@@ -1,5 +1,8 @@
 package com.ok.WorldBankData.tests;
 
+import com.ok.WorldBankData.pageobjects.*;
+import com.ok.selenium.util.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,10 +28,11 @@ public class WBD_Test_1 {
 	    
 	//	Sr. No.   Test Step   Expected Result
 	//	 1  Open the world bank site in a firefox browser.
-	//	 www.worldbank.org  World bank site home page should open.
-	     driver.get("http://www.worldbank.org");
+	//	 www.worldbank.org  World bank site home page should open
+		HomePage homePage = WebUtil.goToPage(driver, HomePage.class, "http://www.worldbank.org");
+	//	driver.get("http://www.worldbank.org");
 	//	 2  Click on the Data tab.  It should navigate to World bank site Data tab.
-	     
+	     homePage.clickDataTab(driver);
 	//	 3  Click on the link "visit the old site here" to navigate to older site.
 	//	(Note - Above step added due to recent modification to the world bank website)
 	//	Click on the "By Country" option below the label "Data".  It should navigate to "http://archive.data.worldbank.org/" page
