@@ -1,4 +1,4 @@
-package com.ok.WorldBankData.locators;
+package com.ok.WorldBankData.config;
 
 import org.openqa.selenium.By;
 

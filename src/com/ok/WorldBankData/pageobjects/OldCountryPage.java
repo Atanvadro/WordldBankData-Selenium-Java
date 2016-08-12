@@ -1,6 +1,6 @@
 package com.ok.WorldBankData.pageobjects;
 
-import com.ok.WorldBankData.locators.*;
+import com.ok.WorldBankData.config.*;
 import com.ok.WorldBankData.tests.CountryData;
 
 import org.openqa.selenium.WebDriver;
