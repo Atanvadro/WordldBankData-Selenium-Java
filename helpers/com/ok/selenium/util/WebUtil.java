@@ -1,6 +1,7 @@
 package com.ok.selenium.util;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -17,9 +18,23 @@ public class WebUtil {
         driver.get(pageURL);
         return PageFactory.initElements(driver, PageObject);
     }
+    
+    public static <T> T navigateBack(WebDriver driver, java.lang.Class<T> PageObject){
+    	driver.navigate().back();
+    	return PageFactory.initElements(driver, PageObject);
+    }
 
     public static void click(WebDriver driver, By by) {
         WebElement element = driver.findElement(by);
+        element.click();
+    }
+    
+    public static void clickWithOffset(WebDriver driver, By by){
+		WebElement element = driver.findElement(by);
+        JavascriptExecutor js =(JavascriptExecutor)driver;
+        int offset = 100;
+        int position = element.getLocation().getY() - offset;
+        js.executeScript("window.scrollTo(0, arguments[0])", position);
         element.click();
     }
 
@@ -47,4 +62,6 @@ public class WebUtil {
         WebElement element = driver.findElement(by);
         return element.getText();
     }
+    
+    
 }
