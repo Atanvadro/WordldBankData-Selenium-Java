@@ -11,6 +11,13 @@ public class CountryData {
 		this.name = name;
 	}
 	
+	public CountryData(String name, double GDP, long population, float CO2)	{
+		this.name = name;
+		this.GDP = GDP;
+		this.population = population;
+		this.CO2 = CO2;
+	}
+	
 	public String toString(){
 		return "Country: " + name + " GDP: " + GDP + " Population: " + population + " CO2: " + CO2;
 	}

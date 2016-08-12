@@ -1,9 +1,13 @@
 package com.ok.selenium.util;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import com.ok.WorldBankData.tests.CountryData;
+import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 public class CSVUtil {
@@ -20,5 +24,27 @@ public class CSVUtil {
 	      //close the writer
 	      writer.close();
 	}
+	
+	public static CountryData[] loadArrayFromCSV(String filePath) throws IOException{
+	      CSVReader reader = new CSVReader(new FileReader(filePath), ';');
+	      
 
+	      List<String[]> allRows = reader.readAll();
+	      CountryData[] countriesArr = new CountryData[allRows.size() - 1];
+	      
+	      for(int i = 1; i < allRows.size(); i++){
+	    	  String[] row = allRows.get(i);
+	    	  String name = row[0];
+	    	  double GDP = Double.parseDouble(row[1]);
+	    	  long population = Long.parseLong(row[2]);
+	    	  float CO2 = Float.parseFloat(row[3]);
+	    	  countriesArr[i-1] = new CountryData(name, GDP, population, CO2);
+	          
+	    	  System.out.println(countriesArr[i-1].toString());
+	      }
+	      
+	      //close the writer
+	      reader.close();
+	      return countriesArr;
+	}
 }
