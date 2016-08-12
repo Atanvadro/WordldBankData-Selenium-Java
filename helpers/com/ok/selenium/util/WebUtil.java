@@ -48,7 +48,7 @@ public class WebUtil {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static boolean doesElementExist(WebDriver driver, By by) {
+    public static boolean elementExists(WebDriver driver, By by) {
         return (driver.findElements(by).size() > 0);
     }
 

@@ -13,16 +13,28 @@ public class OldCountryPage {
 		String countryName = WebUtil.getElementText(driver, Locators.countryNameLocator);
 		CountryData data = new CountryData(countryName);
 		
-		String GDP = WebUtil.getElementText(driver, Locators.GDPLocator);
-		System.out.println(parseGDP(GDP));
+		String GDP;
+		if (WebUtil.elementExists(driver, Locators.GDPLocator))
+			GDP = WebUtil.getElementText(driver, Locators.GDPLocator);
+		else
+			GDP = "0";
+		//System.out.println(parseGDP(GDP));
 		data.GDP = parseGDP(GDP);
 		
-		String population = WebUtil.getElementText(driver, Locators.populationLocator);
-		System.out.println(parsePopulation(population));
+		String population;
+		if (WebUtil.elementExists(driver, Locators.populationLocator))
+			population = WebUtil.getElementText(driver, Locators.populationLocator);
+		else
+			population = "0";
+		//System.out.println(parsePopulation(population));
 		data.population = parsePopulation(population);
 		
-		String CO2 = WebUtil.getElementText(driver, Locators.CO2Locator);
-		System.out.println(CO2);
+		String CO2;
+		if (WebUtil.elementExists(driver, Locators.CO2Locator))
+			CO2 = WebUtil.getElementText(driver, Locators.CO2Locator);
+		else
+			CO2 = "0";
+		//System.out.println(CO2);
 		data.CO2 = parseCO2(CO2);
 		
 		return data;
@@ -34,7 +46,7 @@ public class OldCountryPage {
 
 	private double parseGDP(String GDP){
 		
-		String trimmedStr = GDP.replace("$", "").replace("billion", "").replace("trillion","").replace(" ", "");
+		String trimmedStr = GDP.replace("$", "").replace("million", "").replace("billion", "").replace("trillion","").replace(" ", "");
 		
 		double tempDbl = Double.parseDouble(trimmedStr);
 		

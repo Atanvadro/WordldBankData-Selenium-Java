@@ -19,7 +19,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class WBD_Test_1 {
 	public static void main(String [ ] args) throws Exception{
 	
-	//	WebDriver driver = new FirefoxDriver();
+		WebDriver driver = new FirefoxDriver();
 	//    @Before
 	//    public void setDriver(){
 	//        String browserName = System.getenv("browser");
@@ -36,7 +36,7 @@ public class WBD_Test_1 {
 	//	Sr. No.   Test Step   Expected Result
 	//	 1  Open the world bank site in a firefox browser.
 	//	 www.worldbank.org  World bank site home page should open
-	//	HomePage homePage;
+		HomePage homePage;
 	//	homePage= WebUtil.goToPage(driver, HomePage.class, "http://www.worldbank.org");
 	//	driver.get("http://www.worldbank.org");
 	//	 2  Click on the Data tab.  It should navigate to World bank site Data tab.
@@ -50,49 +50,42 @@ public class WBD_Test_1 {
 	//     OldCountriesAndEconomiesPage oldCountriesAndEconomiesPage = oldDataMenuTab.clickByCountryTab(driver);
 	//	 4  In the Countries and Economies" section, in the "Income Levels" block,  click on "High income" item.  It should navigate to World bank site's income-level/HIC page. 
 	//     OldHICPage oldHICPAge = oldCountriesAndEconomiesPage.clickHighIncome(driver);
-	//	 5  Click on Country Andorra.  It should navigate to Andorra country specific page.
+		OldHICPage oldHICPage = WebUtil.goToPage(driver, OldHICPage.class, "http://archive.data.worldbank.org/income-level/HIC");
+		CountryData[] countriesDataArr = oldHICPage.initCountriesDataArray(driver);
 
-		
-//		OldHICPage oldHICPage = WebUtil.goToPage(driver, OldHICPage.class, "http://archive.data.worldbank.org/income-level/HIC");
-//		OldCountryPage oldCountryPage = oldHICPage.clickOnCountry(driver, "Andorra");
-		
-	//	 6  Note the value for following 3 factors
-	//	"GDP at market prices (current US$)"
-	//	"Population, total"
-	//	"CO2 emissions (metric tons per capita)"
-	//	 The required data should get noted for the specific country.
-//		CountryData country = oldCountryPage.getData(driver);
+//	 	5  Click on Country Andorra.  It should navigate to Andorra country specific page.
+		OldCountryPage oldCountryPage = oldHICPage.clickOnCountry(driver, "Andorra");
+		  
+//	 	6  Note the value for following 3 factors
+//		"GDP at market prices (current US$)"
+//		"Population, total"
+//		"CO2 emissions (metric tons per capita)"
+//	 	The required data should get noted for the specific country.
+		CountryData andorraData = oldCountryPage.getData(driver);
 //		System.out.println(country.toString());
-//OldCountryPage oldCountryPage = WebUtil.goToPage(driver, OldCountryPage.class, "http://archive.data.worldbank.org/country/united-states");
+//		OldCountryPage oldCountryPage = WebUtil.goToPage(driver, OldCountryPage.class, "http://archive.data.worldbank.org/country/united-states");
 //		OldCountryPage oldCountryPage11 = WebUtil.goToPage(driver, OldCountryPage.class, "http://archive.data.worldbank.org/country/andorra");
 //		CountryData country11 = oldCountryPage11.getData(driver);
 //		System.out.println(country11.toString());
 	     
-	//	 7  Navigate back to World bank site's income-level/HIC page.  It should navigate to World bank site's income-level/HIC page.
-//		oldHICPage = WebUtil.navigateBack(driver, OldHICPage.class);
+//		7  Navigate back to World bank site's income-level/HIC page.  It should navigate to World bank site's income-level/HIC page.
+		oldHICPage = WebUtil.navigateBack(driver, OldHICPage.class);
 		
-	//	 8  Read and note the data as in step 6 for each country.  The required data should get noted for all the countries.
-
-//		List<WebElement> countriesElementsList = driver.findElements(By.xpath(Locators.countriesLocator));
-//		int numberOfCountries = countriesElementsList.size();
-//		CountryData[] countriesData = new CountryData[numberOfCountries];
-//		int i = 0;
-//		for ( WebElement element: countriesElementsList) {
-//			System.out.println(element.getText());
-//			String countryName = element.getText();
-//			countriesData[i] = new CountryData(countryName);
-//			i++;
-//		}
-//		
-//		for (i = 0; i< countriesData.length; i++){
-//			System.out.println(i + " " + countriesData[i].toString());
-//		}
-
+//	 	8  Read and note the data as in step 6 for each country.  The required data should get noted for all the countries.
+		for (int i = 0; i < countriesDataArr.length; i++){
+			String nextCountry = countriesDataArr[i].name;
+			
+			oldCountryPage = oldHICPage.clickOnCountry(driver, nextCountry);
+			countriesDataArr[i] = oldCountryPage.getData(driver);
+			oldHICPage = WebUtil.navigateBack(driver, OldHICPage.class);
+					
+			System.out.println(i + " " + countriesDataArr[i].toString());
+		}
 //		 9  Click on Home tab of the country page.  World bank site home page should open. 
-//	     homePage = oldHICPage.clickOnHomePageTab(driver);
+	     homePage = oldHICPage.clickOnHomePageTab(driver);
 		
 //	 	10  Close the browser.  Browser should get closed. 
-//	     WebUtil.closeBrowser(driver);
+	     WebUtil.closeBrowser(driver);
 	     
 //		11  Process the data programmatically and log the names of  top 3 countries along with their "GDP at market prices (current US$)" value.  It should log the names of top 3 countries as per their "GDP at market prices (current US$)" value to the test log.
 	     
@@ -101,21 +94,21 @@ public class WBD_Test_1 {
 //	 	13  Process the data programmatically and log the names of  top 3 countries along with their "CO2 emissions (metric tons per capita)" value.  It should log the names of top 3 countries as per their "CO2 emissions (metric tons per capita)" value to the test log.
 	     
 //	 	14  Export the all country data for all the 3 factors in the csv format at appropriate location in the Project directory.     It should export the specified data in the csv format at appropriate location in the Project directory. 
-	      CountryData country = new CountryData("Ukraine");
-	      country.population = 50000000;
-	      country.GDP = 1000000000000d;
-	      country.CO2 = 16.0f;
-	      CountryData[] countries = new CountryData[3];
-	      countries[0] = country;
-	      countries[1] = country;
-	      countries[2] = new CountryData("Empty");
-	      
+//	      CountryData country = new CountryData("Ukraine");
+//	      country.population = 50000000;
+//	      country.GDP = 1000000000000d;
+//	      country.CO2 = 16.0f;
+//	      CountryData[] countries = new CountryData[3];
+//	      countries[0] = country;
+//	      countries[1] = country;
+//	      countries[2] = new CountryData("Empty");
+//	      
 	      String[] headers = new String[4];
 	      headers[0] = "Country name";
 	      headers[1] = "GDP";
 	      headers[2] = "Population";
 	      headers[3] = "CO2";
 		
-	      CSVUtil.saveArrayToCSV(countries, headers, Config.pathToExportCSV);	
+	      CSVUtil.saveArrayToCSV(countriesDataArr, headers, Config.pathToExportCSV);	
 	}
 }

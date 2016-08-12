@@ -13,6 +13,7 @@ public class Locators {
 	public static String highIncomeLinkLocator = "//a[text() = 'High income']";
 	
 	public static String countriesLocator = "//div[@id = 'block-views-income_levels_countries-block_1']//div[@class = 'grid-item']//a";
+	public static final By PopUpBannerLocator = By.xpath("//a[text() = 'No, thanks']");
 	
 	public static final By countryNameLocator = By.xpath("//h1");
 	public static final By GDPLocator = By.xpath("//a[contains(@href,'GDP.MKTP')]/span");
