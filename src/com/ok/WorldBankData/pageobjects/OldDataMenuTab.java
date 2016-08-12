@@ -9,9 +9,8 @@ import com.ok.selenium.util.WebUtil;
 
 public class OldDataMenuTab {
 
-	public OldCountriesAndEconomiesPage clickByCountryTab(WebDriver driver) {
+	public OldCountriesAndEconomiesPage clickOnByCountryTab(WebDriver driver) {
 		WebUtil.click(driver, By.xpath(Locators.byCountryTabLocator));
 		return PageFactory.initElements(driver, OldCountriesAndEconomiesPage.class);
-	}
-	
+	}	
 }

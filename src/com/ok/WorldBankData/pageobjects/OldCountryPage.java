@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import com.ok.selenium.util.WebUtil;
 
 public class OldCountryPage {	
-	
+
 	public CountryData getData(WebDriver driver) {
 		String countryName = WebUtil.getElementText(driver, Locators.countryNameLocator);
 		CountryData data = new CountryData(countryName);
@@ -60,6 +60,4 @@ public class OldCountryPage {
 		
 		return (long)tempDbl;
 	}
-
-
 }

@@ -18,4 +18,6 @@ public class Locators {
 	public static final By GDPLocator = By.xpath("//a[contains(@href,'GDP.MKTP')]/span");
 	public static final By populationLocator = By.xpath("//a[contains(@href,'SP.POP.TOTL')]/span");
 	public static final By CO2Locator = By.xpath("//a[contains(text(), 'CO2 emissions')]/parent::div[@class='indicator-name']/following-sibling::div[position()=1]//span[@class='field-content']");
+
+	public static final By homePageTabLocator = By.xpath("//a[text() = 'Home']");
 }

@@ -10,6 +10,11 @@ import com.ok.selenium.util.WebUtil;
 
 public class OldHICPage {
 	
+	public HomePage clickOnHomePageTab(WebDriver driver){
+		WebUtil.clickWithOffset(driver, Locators.homePageTabLocator);
+		return PageFactory.initElements(driver, HomePage.class);
+	}
+	
 	public OldCountryPage clickOnCountry(WebDriver driver, String countryName){
 		String countryLocator = Locators.countriesLocator + "[text() = '" + countryName + "']";
 		

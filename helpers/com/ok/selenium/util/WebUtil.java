@@ -63,5 +63,7 @@ public class WebUtil {
         return element.getText();
     }
     
-    
+    public static void closeBrowser(WebDriver driver){
+    	driver.quit();
+    }
 }

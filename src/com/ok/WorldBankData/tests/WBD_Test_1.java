@@ -35,7 +35,8 @@ public class WBD_Test_1 {
 	//	Sr. No.   Test Step   Expected Result
 	//	 1  Open the world bank site in a firefox browser.
 	//	 www.worldbank.org  World bank site home page should open
-	//	HomePage homePage = WebUtil.goToPage(driver, HomePage.class, "http://www.worldbank.org");
+		HomePage homePage;
+	//	homePage= WebUtil.goToPage(driver, HomePage.class, "http://www.worldbank.org");
 	//	driver.get("http://www.worldbank.org");
 	//	 2  Click on the Data tab.  It should navigate to World bank site Data tab.
 	//    DataPage dataPage = homePage.clickDataTab(driver);
@@ -86,17 +87,19 @@ public class WBD_Test_1 {
 //			System.out.println(i + " " + countriesData[i].toString());
 //		}
 
-	//	 9  Click on Home tab of the country page.  World bank site home page should open. 
+//		 9  Click on Home tab of the country page.  World bank site home page should open. 
+	     homePage = oldHICPage.clickOnHomePageTab(driver);
+		
+//	 	10  Close the browser.  Browser should get closed. 
+	     WebUtil.closeBrowser(driver);
 	     
-	//	 10  Close the browser.  Browser should get closed. 
+//		11  Process the data programmatically and log the names of  top 3 countries along with their "GDP at market prices (current US$)" value.  It should log the names of top 3 countries as per their "GDP at market prices (current US$)" value to the test log.
 	     
-	//	 11  Process the data programmatically and log the names of  top 3 countries along with their "GDP at market prices (current US$)" value.  It should log the names of top 3 countries as per their "GDP at market prices (current US$)" value to the test log.
+//		12  Process the data programmatically and log the names of  top 3 countries along with their Population, total" value.  It should log the names of top 3 countries as per their "Population, total" value to the test log.
 	     
-	//	 12  Process the data programmatically and log the names of  top 3 countries along with their Population, total" value.  It should log the names of top 3 countries as per their "Population, total" value to the test log.
+//	 	13  Process the data programmatically and log the names of  top 3 countries along with their "CO2 emissions (metric tons per capita)" value.  It should log the names of top 3 countries as per their "CO2 emissions (metric tons per capita)" value to the test log.
 	     
-	//	 13  Process the data programmatically and log the names of  top 3 countries along with their "CO2 emissions (metric tons per capita)" value.  It should log the names of top 3 countries as per their "CO2 emissions (metric tons per capita)" value to the test log.
-	     
-	//	 14  Export the all country data for all the 3 factors in the csv format at appropriate location in the Project directory.     It should export the specified data in the csv format at appropriate location in the Project directory. 
+//	 	14  Export the all country data for all the 3 factors in the csv format at appropriate location in the Project directory.     It should export the specified data in the csv format at appropriate location in the Project directory. 
 	}
 	 public String breakpoint;
 }
