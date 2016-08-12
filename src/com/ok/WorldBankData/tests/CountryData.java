@@ -2,8 +2,8 @@ package com.ok.WorldBankData.tests;
 
 public class CountryData {
 	public String name;
-	public float GDP;
-	public float population;
+	public double GDP;
+	public long population;
 	public float CO2;
 	
 	public CountryData(String name)

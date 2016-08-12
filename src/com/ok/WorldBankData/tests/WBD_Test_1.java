@@ -51,16 +51,26 @@ public class WBD_Test_1 {
 	//	 5  Click on Country Andorra.  It should navigate to Andorra country specific page.
 
 		
-		OldHICPage oldHICPage = WebUtil.goToPage(driver, OldHICPage.class, "http://archive.data.worldbank.org/income-level/HIC");
-		OldCountryPage oldCountryPage = oldHICPage.clickOnCountry(driver, "Andorra");
+		//OldHICPage oldHICPage = WebUtil.goToPage(driver, OldHICPage.class, "http://archive.data.worldbank.org/income-level/HIC");
+		
+		//OldCountryPage oldCountryPage = oldHICPage.clickOnCountry(driver, "Andorra");
 		
 	//	 6  Note the value for following 3 factors
 	//	"GDP at market prices (current US$)"
 	//	"Population, total"
 	//	"CO2 emissions (metric tons per capita)"
 	//	 The required data should get noted for the specific country.
+		OldCountryPage oldCountryPage = WebUtil.goToPage(driver, OldCountryPage.class, "http://archive.data.worldbank.org/country/united-states");
+		CountryData country = oldCountryPage.getData(driver);
+		System.out.println(country.toString());
 		
-	     
+		OldCountryPage oldCountryPage1 = WebUtil.goToPage(driver, OldCountryPage.class, "http://archive.data.worldbank.org/country/china");
+		CountryData country1 = oldCountryPage1.getData(driver);
+		System.out.println(country1.toString());
+		
+		OldCountryPage oldCountryPage11 = WebUtil.goToPage(driver, OldCountryPage.class, "http://archive.data.worldbank.org/country/andorra");
+		CountryData country11 = oldCountryPage11.getData(driver);
+		System.out.println(country11.toString());
 	     
 	//	 7  Navigate back to World bank site's income-level/HIC page.  It should navigate to World bank site's income-level/HIC page.
 	     
