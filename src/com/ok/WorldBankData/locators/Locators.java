@@ -8,4 +8,7 @@ public class Locators {
 	public static String byCountryTabLocator = "//li[@class='country first']";
 
 	public static String highIncomeLinkLocator = "//a[text() = 'High income']";
+	
+	public static String countriesLocator = "//div[@id = 'block-views-income_levels_countries-block_1']//div[@class = 'grid-item']//a";
+	
 }

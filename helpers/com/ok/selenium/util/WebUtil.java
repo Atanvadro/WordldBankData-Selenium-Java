@@ -27,6 +27,11 @@ public class WebUtil {
         WebDriverWait wait = new WebDriverWait(driver, 320);
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
+    
+    public static void waitForElementVisible(WebDriver driver, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 320);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
 
     public static boolean doesElementExist(WebDriver driver, By by) {
         return (driver.findElements(by).size() > 0);
