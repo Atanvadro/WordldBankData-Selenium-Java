@@ -25,38 +25,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 
 public class WBD_TC_1  {
-	 @Rule
-	 public ErrorCollector collector = new ErrorCollector();
-
 	
 	@Test
 	public void TC_1() throws IOException{
 		Logger.setUp();
-		
-	    try {
-	        assertFalse(true);
-	        Logger.logSUCCESS("STEP PASSED");;
-	    } catch (Throwable t) {
-	        Logger.logFAIL("Step failed assertion");
-	    }
-	    
-	    try 
-	    {
-	        assertFalse(false);
-	        Logger.logSUCCESS("STEP PASSED");;
-	    } catch (Throwable t) {
-	        Logger.logFAIL("Step failed assertion");
-	    }
-	    
-	    Logger.logMESSAGE("MESSAGE");
-	    
-	    Logger.tearDown();
-	    
-	    try {
-	        assertFalse(false);
-	    } catch (Throwable t) {
-	        collector.addError(t);
-	    }
 	    
 		WebDriver driver = new FirefoxDriver();
 
@@ -72,15 +44,15 @@ public class WBD_TC_1  {
 //        	}
 //    	}
 		    
-//	 	1.Open the world bank site in a firefox browser.
-//		HomePage homePage;
-//		homePage= WebUtil.goToPage(driver, HomePage.class, Config.homePageURL);
-//	 	www.worldbank.org  World bank site home page should open
-//		Assert.assertEquals("1. World bank site home page should open", Config.homePageURL, driver.getCurrentUrl());
-//	 	2  Click on the Data tab.  
-//	    DataPage dataPage = homePage.clickDataTab(driver);
-//    	It should navigate to World bank site Data page.
-//    	Assert.assertEquals("It should navigate to World bank site Data page", Config.dataPageURL, driver.getCurrentUrl());
+	 	Logger.logMESSAGE("1. Open the world bank site in a firefox browser.");
+		HomePage homePage;
+		homePage = WebUtil.goToPage(driver, HomePage.class, Config.homePageURL);
+		AssertUtil.assertEquals("World bank site home page should open", Config.homePageURL, driver.getCurrentUrl());
+		
+	 	Logger.logMESSAGE("2.  Click on the Data tab. ");
+	    DataPage dataPage = homePage.clickDataTab(driver);
+    	
+	    AssertUtil.assertEquals("It should navigate to World bank site Data page", Config.dataPageURL, driver.getCurrentUrl());
 //	 	3.1  Click on the link "visit the old site here" to navigate to older site.
 //		(Note - Above step added due to recent modification to the world bank website)
 //    	OldDataMenuTab oldDataMenuTab = dataPage.clickOldSiteLink(driver);
@@ -150,6 +122,7 @@ public class WBD_TC_1  {
 //	      headers[3] = "CO2";
 //		
 //	      CSVUtil.saveArrayToCSV(countriesDataArr, headers, Config.pathToExportCSV);	
+	    Logger.tearDown();
 	}
 
 	private static CountryData[] getThreeHighestCO2(CountryData[] countriesDataArr) {
