@@ -7,6 +7,7 @@ import com.ok.selenium.util.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -84,6 +85,9 @@ public class WBD_Test_1 {
 		CountryData[] countriesDataArr = CSVUtil.loadArrayFromCSV(Config.pathToExportCSV);
 		CountryData[] threeHighestGDP = getThreeHighestGDP(countriesDataArr);
 		
+		for (int i = 0; i < 3; i++){
+	  	  	System.out.println(threeHighestGDP[i].toString());
+		}
 //		12  Process the data programmatically and log the names of  top 3 countries along with their Population, total" value.  It should log the names of top 3 countries as per their "Population, total" value to the test log.
 	     
 //	 	13  Process the data programmatically and log the names of  top 3 countries along with their "CO2 emissions (metric tons per capita)" value.  It should log the names of top 3 countries as per their "CO2 emissions (metric tons per capita)" value to the test log.
@@ -99,7 +103,18 @@ public class WBD_Test_1 {
 	}
 
 	private static CountryData[] getThreeHighestGDP(CountryData[] countriesDataArr) {
+		java.util.Arrays.sort(countriesDataArr, new Comparator<CountryData>() {
+		    @Override
+		    public int compare(CountryData c1, CountryData c2) {
+		        return (int) (c2.GDP - c1.GDP);
+		    }
+		});
 		
-		return null;
+		CountryData[] threeHighest = new CountryData[3];
+		threeHighest[0] = countriesDataArr[0];
+		threeHighest[1] = countriesDataArr[1];
+		threeHighest[2] = countriesDataArr[2];
+		
+		return threeHighest;
 	}
 }

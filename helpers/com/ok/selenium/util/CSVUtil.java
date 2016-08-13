@@ -39,8 +39,6 @@ public class CSVUtil {
 	    	  long population = Long.parseLong(row[2]);
 	    	  float CO2 = Float.parseFloat(row[3]);
 	    	  countriesArr[i-1] = new CountryData(name, GDP, population, CO2);
-	          
-	    	  System.out.println(countriesArr[i-1].toString());
 	      }
 	      
 	      //close the writer
