@@ -10,7 +10,7 @@ import com.ok.selenium.util.WebUtil;
 public class OldCountriesAndEconomiesPage {
 
 	public OldHICPage clickHighIncome(WebDriver driver) {
-		WebUtil.click(driver, By.xpath(Locators.highIncomeLinkLocator));
+		WebUtil.clickWithOffset(driver, By.xpath(Locators.highIncomeLinkLocator));
 		return PageFactory.initElements(driver, OldHICPage.class);
 	}
 }
