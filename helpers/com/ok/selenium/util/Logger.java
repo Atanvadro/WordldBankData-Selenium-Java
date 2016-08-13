@@ -1,4 +1,4 @@
-package com.ok.junit.util;
+package com.ok.selenium.util;
 
 import java.awt.Desktop;
 import java.io.BufferedWriter;
@@ -17,9 +17,10 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
-public class JUnitHTMLReporter {
-	static File junitReport;
-	static BufferedWriter junitWriter;
+public class Logger 
+{
+	static File logReport;
+	static BufferedWriter logWriter;
 	
 	@BeforeClass
 	public static void setUp() throws IOException {
@@ -30,46 +31,49 @@ public class JUnitHTMLReporter {
 		System.out.println(dateFormatFileName.format(date));
 		String junitReportFile = System.getProperty("user.dir") + "\\testreports\\" 
 					+ dateFormatFileName.format(date) + " - WorldBankData - TC1 - Report.html";
-		junitReport = new File(junitReportFile);
-		junitWriter = new BufferedWriter(new FileWriter(junitReport, true));
-		junitWriter.write("<html><body>");
-		junitWriter.write("<h1>Test Execution Summary - " + dateFormat.format(date) + "</h1>");
+		logReport = new File(junitReportFile);
+		logWriter = new BufferedWriter(new FileWriter(logReport, true));
+		logWriter.write("<html><body>");
+		logWriter.write("<h1>Test Execution Summary - " + dateFormat.format(date) + "</h1>");
 	}
 	
 	@AfterClass
 	public static void tearDown() throws IOException {
-		junitWriter.write("</body></html>");
-		junitWriter.close();
-		Desktop.getDesktop().browse(junitReport.toURI());
+		logWriter.write("</body></html>");
+		logWriter.close();
+		Desktop.getDesktop().browse(logReport.toURI());
 	}
 	
-	@Rule
-	public TestRule watchman = new TestWatcher() {
-		
-		@Override
-		public Statement apply(Statement base, Description description) {
-			return super.apply(base, description);
+	public static void logMESSAGE(String description) {
+		try {
+			logWriter.write("<div style='color:000000'> ");
+			logWriter.write(description);
+			logWriter.write("</div>");
+			logWriter.write("<br/>");
+			} catch (Exception e1) {
+				System.out.println(e1.getMessage());
+			}
 		}
-		
-		@Override
-		protected void succeeded(Description description) {
-			try {
-				junitWriter.write(description.getDisplayName() + " " + "success!");
-				junitWriter.write("<br/>");
+	
+	public static void logSUCCESS(String description) {
+		try {
+			logWriter.write("<div style='color:00CB00'> ");
+			logWriter.write(description);
+			logWriter.write("</div>");
+			logWriter.write("<br/>");
 			} catch (Exception e1) {
 				System.out.println(e1.getMessage());
 			}
 		}
 				
-		@Override
-		protected void failed(Throwable e, Description description) {
+	public static void logFAIL(String description) {
 			try {
-				junitWriter.write(description.getDisplayName() + " "
-				+ e.getClass().getSimpleName());
-				junitWriter.write("<br/>");
+				logWriter.write("<div style='color:FB0006'> ");
+				logWriter.write(description);
+				logWriter.write("</div>");
+				logWriter.write("<br/>");
 			} catch (Exception e2) {
 				System.out.println(e2.getMessage());
 			}
 		}
-	};
 }
