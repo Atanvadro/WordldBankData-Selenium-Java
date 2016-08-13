@@ -3,13 +3,18 @@ package com.ok.WorldBankData.tests;
 import com.ok.WorldBankData.config.Config;
 import com.ok.WorldBankData.config.Locators;
 import com.ok.WorldBankData.pageobjects.*;
+import com.ok.junit.util.*;
 import com.ok.selenium.util.*;
+
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,8 +22,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 
-public class WBD_Test_1 {
-	public static void main(String [ ] args) throws Exception{
+public class WBD_Test_1 extends JUnitHTMLReporter {
+	
+	@Test
+	public void Test_1() throws Exception{
 	
 //		WebDriver driver = new FirefoxDriver();
 //    	@Before
@@ -83,15 +90,24 @@ public class WBD_Test_1 {
 	     
 //		11  Process the data programmatically and log the names of  top 3 countries along with their "GDP at market prices (current US$)" value.  It should log the names of top 3 countries as per their "GDP at market prices (current US$)" value to the test log.
 		CountryData[] countriesDataArr = CSVUtil.loadArrayFromCSV(Config.pathToExportCSV);
-		CountryData[] threeHighestGDP = getThreeHighestGDP(countriesDataArr);
 		
-		for (int i = 0; i < 3; i++){
-	  	  	System.out.println(threeHighestGDP[i].toString());
-		}
+//		CountryData[] threeHighestGDP = getThreeHighestGDP(countriesDataArr);
+//		for (int i = 0; i < 3; i++){
+//	  	  	System.out.println(threeHighestGDP[i].toString());
+//		}
 //		12  Process the data programmatically and log the names of  top 3 countries along with their Population, total" value.  It should log the names of top 3 countries as per their "Population, total" value to the test log.
-	     
+//		CountryData[] threeHighestPopulation = getThreeHighestPopulation(countriesDataArr);
+//		
+//		for (int i = 0; i < 3; i++){
+//	  	  	System.out.println(threeHighestPopulation[i].toString());
+//		}	     
 //	 	13  Process the data programmatically and log the names of  top 3 countries along with their "CO2 emissions (metric tons per capita)" value.  It should log the names of top 3 countries as per their "CO2 emissions (metric tons per capita)" value to the test log.
-	     
+		CountryData[] threeHighestCO2 = getThreeHighestCO2(countriesDataArr);
+		
+		assertTrue(1 < 2);
+		for (int i = 0; i < 3; i++){
+	  	  	System.out.println(threeHighestCO2[i].toString());
+		}	  
 //	 	14  Export the all country data for all the 3 factors in the csv format at appropriate location in the Project directory.     It should export the specified data in the csv format at appropriate location in the Project directory. 
 //	      String[] headers = new String[4];
 //	      headers[0] = "Country name";
@@ -102,8 +118,43 @@ public class WBD_Test_1 {
 //	      CSVUtil.saveArrayToCSV(countriesDataArr, headers, Config.pathToExportCSV);	
 	}
 
+	private static CountryData[] getThreeHighestCO2(CountryData[] countriesDataArr) {
+		CountryData[] tempArr = countriesDataArr.clone();
+		java.util.Arrays.sort(tempArr, new Comparator<CountryData>() {
+		    @Override
+		    public int compare(CountryData c1, CountryData c2) {
+		        return (int) (c2.CO2 - c1.CO2);
+		    }
+		});
+		
+		CountryData[] threeHighest = new CountryData[3];
+		threeHighest[0] = tempArr[0];
+		threeHighest[1] = tempArr[1];
+		threeHighest[2] = tempArr[2];
+		
+		return threeHighest;
+	}
+
+	private static CountryData[] getThreeHighestPopulation(CountryData[] countriesDataArr) {
+		CountryData[] tempArr = countriesDataArr.clone();
+		java.util.Arrays.sort(tempArr, new Comparator<CountryData>() {
+		    @Override
+		    public int compare(CountryData c1, CountryData c2) {
+		        return (int) (c2.population - c1.population);
+		    }
+		});
+		
+		CountryData[] threeHighest = new CountryData[3];
+		threeHighest[0] = tempArr[0];
+		threeHighest[1] = tempArr[1];
+		threeHighest[2] = tempArr[2];
+		
+		return threeHighest;
+	}
+
 	private static CountryData[] getThreeHighestGDP(CountryData[] countriesDataArr) {
-		java.util.Arrays.sort(countriesDataArr, new Comparator<CountryData>() {
+		CountryData[] tempArr = countriesDataArr.clone();
+		java.util.Arrays.sort(tempArr, new Comparator<CountryData>() {
 		    @Override
 		    public int compare(CountryData c1, CountryData c2) {
 		        return (int) (c2.GDP - c1.GDP);
@@ -111,9 +162,9 @@ public class WBD_Test_1 {
 		});
 		
 		CountryData[] threeHighest = new CountryData[3];
-		threeHighest[0] = countriesDataArr[0];
-		threeHighest[1] = countriesDataArr[1];
-		threeHighest[2] = countriesDataArr[2];
+		threeHighest[0] = tempArr[0];
+		threeHighest[1] = tempArr[1];
+		threeHighest[2] = tempArr[2];
 		
 		return threeHighest;
 	}
