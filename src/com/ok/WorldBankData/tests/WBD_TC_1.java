@@ -8,6 +8,7 @@ import com.ok.selenium.util.*;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -96,17 +97,15 @@ public class WBD_TC_1  {
 		CountryData[] countriesDataArr = oldHICPage.initCountriesDataArray(driver);
 		CountryData[] etalonCountriesDataArr = CSVUtil.loadArrayFromCSV(Config.pathToEtalonCountriesData);
 
-		for (int i = 0; i < 5; i++){
+		for (int i = 0; i < 0; i++){
 			String nextCountry = countriesDataArr[i].name;
 			
 			oldCountryPage = oldHICPage.clickOnCountry(driver, nextCountry);
 			countriesDataArr[i] = oldCountryPage.getData(driver);
 			
-			AssertUtil.assertEquals("The required data should get noted for the " + etalonCountriesDataArr[i].name, 
+			AssertUtil.assertEquals("Data for " + etalonCountriesDataArr[i].name + " : " + countriesDataArr[i].toString(), 
 									etalonCountriesDataArr[i].toString(), 
 									countriesDataArr[i].toString());
-			Logger.logMESSAGE(countriesDataArr[i].toString());
-			
 			oldHICPage = WebUtil.navigateBack(driver, OldHICPage.class);
 					
 			System.out.println(i + " " + countriesDataArr[i].toString());
@@ -130,27 +129,27 @@ public class WBD_TC_1  {
 		CountryData[] threeHighestGDP = getThreeHighestGDP(etalonCountriesDataArr);
 		
 		for (int i = 0; i < 3; i++){
-			Logger.logMESSAGE(threeHighestGDP[i].toString());
+			AssertUtil.assertEquals(threeHighestGDP[i].toString(), Config.etalonThreeHighestGDP[i], threeHighestGDP[i].toString());			
 		}
 			
 //		12  Process the data programmatically and log the names of  top 3 countries along with their Population, total" value.  It should log the names of top 3 countries as per their "Population, total" value to the test log.
 		Logger.logMESSAGE("12.  Process the data programmatically and log the names of  top 3 countries along with their 'Population, total' value");
-		CountryData[] threeHighestPopulation = getThreeHighestPopulation(countriesDataArr);
+		CountryData[] threeHighestPopulation = getThreeHighestPopulation(etalonCountriesDataArr);
 		
 		for (int i = 0; i < 3; i++){
-			Logger.logMESSAGE(threeHighestPopulation[i].toString());
+			AssertUtil.assertEquals(threeHighestPopulation[i].toString(), Config.etalonThreeHighestPopulation[i], threeHighestPopulation[i].toString());
 		}	 
 		
 //	 	13  Process the data programmatically and log the names of  top 3 countries along with their 'CO2 emissions (metric tons per capita)" value.  It should log the names of top 3 countries as per their "CO2 emissions (metric tons per capita)" value to the test log.
-		Logger.logMESSAGE("12.  Process the data programmatically and log the names of  top 3 countries along with their 'CO2 emissions, (metric tons per capita)' value.");
-		CountryData[] threeHighestCO2 = getThreeHighestCO2(countriesDataArr);
+		Logger.logMESSAGE("13.  Process the data programmatically and log the names of  top 3 countries along with their 'CO2 emissions, (metric tons per capita)' value.");
+		CountryData[] threeHighestCO2 = getThreeHighestCO2(etalonCountriesDataArr);
 		
 		for (int i = 0; i < 3; i++){
-			Logger.logMESSAGE(threeHighestCO2[i].toString());
+			AssertUtil.assertEquals(threeHighestCO2[i].toString(), Config.etalonThreeHighestCO2[i], threeHighestCO2[i].toString());			
 		}
 		
 //	 	14  Export the all country data for all the 3 factors in the csv format at appropriate location in the Project directory.     It should export the specified data in the csv format at appropriate location in the Project directory. 
-		Logger.logMESSAGE("13.  Export the all country data for all the 3 factors in the csv format at appropriate location in the Project directory..");
+		Logger.logMESSAGE("14.  Export the all country data for all the 3 factors in the csv format at appropriate location in the Project directory..");
 
 		String[] headers = new String[4];
 	    headers[0] = "Country name";
@@ -159,8 +158,14 @@ public class WBD_TC_1  {
 	    headers[3] = "CO2";
 		
 	    CSVUtil.saveArrayToCSV(countriesDataArr, headers, Config.pathToExportCountriesData);
-	    
-	    
+	    File checkFile = new File(Config.pathToExportCountriesData);
+	    if (checkFile.lastModified() - System.currentTimeMillis() < 60000){
+	    	Logger.logSUCCESS("File was succesfully creadted.");
+	    }else
+	    {
+	    	Logger.logFAIL("File was not created.");
+	    }
+
 	    Logger.tearDown();
 	}
 

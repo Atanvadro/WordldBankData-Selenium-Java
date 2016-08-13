@@ -17,7 +17,8 @@ public class AssertUtil {
 			 Logger.logSUCCESS(message + " - passed");
 		 }else{
 			 Logger.logFAIL(message + " - failed");
-			 Logger.logFAIL("Expected: " + expected + " Actual: " + actual);
+			 Logger.logFAIL("Expected: " + expected); 
+			 Logger.logFAIL("  Actual: " + actual);
 		 }
 	}
 
