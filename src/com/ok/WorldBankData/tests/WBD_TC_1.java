@@ -3,25 +3,16 @@ package com.ok.WorldBankData.tests;
 import com.ok.WorldBankData.config.Config;
 import com.ok.WorldBankData.config.Locators;
 import com.ok.WorldBankData.pageobjects.*;
-import com.ok.junit.util.*;
 import com.ok.selenium.util.*;
 
-import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ErrorCollector;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -97,7 +88,7 @@ public class WBD_TC_1  {
 		CountryData[] countriesDataArr = oldHICPage.initCountriesDataArray(driver);
 		CountryData[] etalonCountriesDataArr = CSVUtil.loadArrayFromCSV(Config.pathToEtalonCountriesData);
 
-		for (int i = 0; i < 0; i++){
+		for (int i = 0; i < countriesDataArr.length; i++){
 			String nextCountry = countriesDataArr[i].name;
 			
 			oldCountryPage = oldHICPage.clickOnCountry(driver, nextCountry);
@@ -126,7 +117,7 @@ public class WBD_TC_1  {
 	     
 //		11  Process the data programmatically and log the names of  top 3 countries along with their "GDP at market prices (current US$)" value.  It should log the names of top 3 countries as per their "GDP at market prices (current US$)" value to the test log.
 		Logger.logMESSAGE("11. Process the data programmatically and log the names of  top 3 countries along with their 'GDP'");
-		CountryData[] threeHighestGDP = getThreeHighestGDP(etalonCountriesDataArr);
+		CountryData[] threeHighestGDP = getThreeHighestGDP(countriesDataArr);
 		
 		for (int i = 0; i < 3; i++){
 			AssertUtil.assertEquals(threeHighestGDP[i].toString(), Config.etalonThreeHighestGDP[i], threeHighestGDP[i].toString());			
@@ -134,7 +125,7 @@ public class WBD_TC_1  {
 			
 //		12  Process the data programmatically and log the names of  top 3 countries along with their Population, total" value.  It should log the names of top 3 countries as per their "Population, total" value to the test log.
 		Logger.logMESSAGE("12.  Process the data programmatically and log the names of  top 3 countries along with their 'Population, total' value");
-		CountryData[] threeHighestPopulation = getThreeHighestPopulation(etalonCountriesDataArr);
+		CountryData[] threeHighestPopulation = getThreeHighestPopulation(countriesDataArr);
 		
 		for (int i = 0; i < 3; i++){
 			AssertUtil.assertEquals(threeHighestPopulation[i].toString(), Config.etalonThreeHighestPopulation[i], threeHighestPopulation[i].toString());
@@ -142,7 +133,7 @@ public class WBD_TC_1  {
 		
 //	 	13  Process the data programmatically and log the names of  top 3 countries along with their 'CO2 emissions (metric tons per capita)" value.  It should log the names of top 3 countries as per their "CO2 emissions (metric tons per capita)" value to the test log.
 		Logger.logMESSAGE("13.  Process the data programmatically and log the names of  top 3 countries along with their 'CO2 emissions, (metric tons per capita)' value.");
-		CountryData[] threeHighestCO2 = getThreeHighestCO2(etalonCountriesDataArr);
+		CountryData[] threeHighestCO2 = getThreeHighestCO2(countriesDataArr);
 		
 		for (int i = 0; i < 3; i++){
 			AssertUtil.assertEquals(threeHighestCO2[i].toString(), Config.etalonThreeHighestCO2[i], threeHighestCO2[i].toString());			
